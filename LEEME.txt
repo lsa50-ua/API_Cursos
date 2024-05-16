@@ -1,0 +1,16 @@
+Para iniciar la aplicacion:
+	- En ambas carpetas hay que ejecutar "npm i " para instalar las dependencias
+	- Para arrancar el backend, desde la carpeta server "node server.js"
+	- Para arrancar el frontend, desde la carpeta client ejecutar "npm run dev"
+
+Alguno de los usuarios para iniciar sesion en la app:
+	- email: luis@ua	contraseña: 123
+	- email: carla@ua	contraseña: 123
+
+Requisitos adicionales implementados:
+	- Búsqueda y paginación de datos
+	- Introducir transiciones/animaciones cuando aparezcan/desaparezcan elementos de la página. 
+	  Añadir además el típico efecto de que el botón/formulario “tiembla” cuando introducimos un login/password incorrectos. 
+	- Añadido diseño responsive con CSS
+	- Usar un router para gestionar la navegación por la app.
+	

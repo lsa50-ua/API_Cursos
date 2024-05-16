@@ -1,0 +1,723 @@
+{
+	"info": {
+		"_postman_id": "cf2f24f0-3c3b-44c2-960f-686ef33fdb9e",
+		"name": "ADI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30666165"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Definir el host de la API\r",
+							"pm.environment.set(\"host\", \"http://localhost:3000\");\r",
+							"\r",
+							"// Definir el body de la solicitud\r",
+							"const requestBody = {\r",
+							"    \"email\": \"luis@ua\",\r",
+							"    \"contraseña\": \"123\"\r",
+							"};\r",
+							"\r",
+							"// Enviar la solicitud POST a la ruta /api/login\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"host\") + \"/api/login\",\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type:application/json',\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(requestBody)\r",
+							"    }\r",
+							"}, function (err, response) {\r",
+							"    // Verificar si no hay errores\r",
+							"    if (err) {\r",
+							"        console.log(err);\r",
+							"    } else {\r",
+							"        // Verificar el código de estado\r",
+							"        pm.test(\"Estado de respuesta es 200\", function () {\r",
+							"            pm.response.to.have.status(200);\r",
+							"        });\r",
+							"\r",
+							"        // Verificar el mensaje de respuesta\r",
+							"        pm.test(\"Mensaje de respuesta es 'Login Correcto'\", function () {\r",
+							"            pm.expect(pm.response.json().message).to.eql('Login Correcto');\r",
+							"        });\r",
+							"\r",
+							"        // Verificar la presencia del token en la respuesta\r",
+							"        pm.test(\"El token está presente en la respuesta\", function () {\r",
+							"            pm.expect(pm.response.json()).to.have.property('token');\r",
+							"        });\r",
+							"\r",
+							"        // Verificar que el token no esté vacío\r",
+							"        pm.test(\"El token no está vacío\", function () {\r",
+							"            pm.expect(pm.response.json().token).to.not.eql('');\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"luis@ua\",\r\n    \"contraseña\": \"123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Definir el host de la API\r",
+							"pm.environment.set(\"host\", \"http://localhost:3000\");\r",
+							"\r",
+							"// Definir el body de la solicitud\r",
+							"const requestBody = {\r",
+							"    \"nombre\": \"Nombre Ejemplo\",\r",
+							"    \"email\": \"ejemplo@ejemplo.com\",\r",
+							"    \"contraseña\": \"contraseñaEjemplo\"\r",
+							"};\r",
+							"\r",
+							"// Enviar la solicitud POST a la ruta /api/registro\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"host\") + \"/api/registro\",\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type:application/json',\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(requestBody)\r",
+							"    }\r",
+							"}, function (err, response) {\r",
+							"    // Verificar si no hay errores\r",
+							"    if (err) {\r",
+							"        console.log(err);\r",
+							"    } else {\r",
+							"        // Verificar el código de estado\r",
+							"        pm.test(\"Estado de respuesta es 409\", function () {\r",
+							"            pm.response.to.have.status(409);\r",
+							"        });\r",
+							"\r",
+							"        // Verificar el mensaje de respuesta\r",
+							"        pm.test(\"Mensaje de respuesta es 'Ya existe un usuario con este correo electrónico'\", function () {\r",
+							"            pm.expect(pm.response.json().message).to.eql('Ya existe un usuario con este correo electrónico');\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Eduardo\",\r\n    \"email\": \"edu@ua\",\r\n    \"contraseña\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/registro",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"registro"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Definir el host de la API\r",
+							"pm.environment.set(\"host\", \"http://localhost:3000\");\r",
+							"\r",
+							"// Obtener el token de autenticación (asegúrate de ajustar esto según tu implementación de autenticación)\r",
+							"const token = \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZW1haWwiOiJlZHVAdWEifQ.V_02yjmXYX19Yteko-nKHpFPL_xHa9fGOkTK_ubdiLk\";\r",
+							"\r",
+							"// Configurar los headers con el token de autenticación\r",
+							"pm.request.headers.add({key: 'Authorization', value: `Bearer ${token}`});\r",
+							"\r",
+							"// Enviar la solicitud GET a la ruta /api/usuarios\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"host\") + \"/api/usuarios\",\r",
+							"    method: 'GET',\r",
+							"    header: 'Content-Type:application/json'\r",
+							"}, function (err, response) {\r",
+							"    // Verificar si no hay errores\r",
+							"    if (err) {\r",
+							"        console.log(err);\r",
+							"    } else {\r",
+							"        // Verificar el código de estado\r",
+							"        pm.test(\"Estado de respuesta es 200\", function () {\r",
+							"            pm.response.to.have.status(200);\r",
+							"        });\r",
+							"\r",
+							"        // Verificar la presencia de datos de usuario en la respuesta\r",
+							"        pm.test(\"Datos de usuarios presentes en la respuesta\", function () {\r",
+							"            pm.expect(pm.response.json()).to.have.property('datos');\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZW1haWwiOiJlZHVAdWEifQ.V_02yjmXYX19Yteko-nKHpFPL_xHa9fGOkTK_ubdiLk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cursos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Definir el host de la API\r",
+							"pm.environment.set(\"host\", \"http://localhost:3000\");\r",
+							"\r",
+							"// Obtener el token de autenticación (asegúrate de ajustar esto según tu implementación de autenticación)\r",
+							"const token = \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJsdWlzQHVhIn0.B2QTdNkjICiZrLd3HePI1gh7IOc4BhLunc1qcatR9dc\";\r",
+							"\r",
+							"// Configurar los headers con el token de autenticación\r",
+							"pm.request.headers.add({key: 'Authorization', value: `Bearer ${token}`});\r",
+							"\r",
+							"// Enviar la solicitud GET a la ruta /api/cursos\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"host\") + \"/api/cursos\",\r",
+							"    method: 'GET',\r",
+							"    header: 'Content-Type:application/json'\r",
+							"}, function (err, response) {\r",
+							"    // Verificar si no hay errores\r",
+							"    if (err) {\r",
+							"        console.log(err);\r",
+							"    } else {\r",
+							"        // Verificar el código de estado\r",
+							"        pm.test(\"Estado de respuesta es 200\", function () {\r",
+							"            pm.response.to.have.status(200);\r",
+							"        });\r",
+							"\r",
+							"        // Verificar la presencia de datos de cursos en la respuesta\r",
+							"        pm.test(\"Datos de cursos presentes en la respuesta\", function () {\r",
+							"            pm.expect(pm.response.json()).to.have.property('data');\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJsdWlzQHVhIn0.B2QTdNkjICiZrLd3HePI1gh7IOc4BhLunc1qcatR9dc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/cursos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cursos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NewCurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Definir el host de la API\r",
+							"pm.environment.set(\"host\", \"http://localhost:3000\");\r",
+							"\r",
+							"// Obtener el token de autenticación (asegúrate de ajustar esto según tu implementación de autenticación)\r",
+							"const token = \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZW1haWwiOiJlZHVAdWEifQ.V_02yjmXYX19Yteko-nKHpFPL_xHa9fGOkTK_ubdiLk\";\r",
+							"\r",
+							"// Configurar los headers con el token de autenticación\r",
+							"pm.request.headers.add({key: 'Authorization', value: `Bearer ${token}`});\r",
+							"\r",
+							"// Definir el body de la solicitud\r",
+							"const requestBody = {\r",
+							"    \"titulo\": \"Título del Curso\",\r",
+							"    \"descripcion\": \"Descripción del Curso\",\r",
+							"    \"precio\": 19.99\r",
+							"};\r",
+							"\r",
+							"// Enviar la solicitud POST a la ruta /api/cursos\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"host\") + \"/api/cursos\",\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type:application/json',\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(requestBody)\r",
+							"    }\r",
+							"}, function (err, response) {\r",
+							"    // Verificar si no hay errores\r",
+							"    if (err) {\r",
+							"        console.log(err);\r",
+							"    } else {\r",
+							"        // Verificar el código de estado\r",
+							"        pm.test(\"Estado de respuesta es 409\", function () {\r",
+							"            pm.response.to.have.status(409);\r",
+							"        });\r",
+							"\r",
+							"        // Verificar el mensaje de respuesta\r",
+							"        pm.test(\"Mensaje de respuesta es 'Ya existe un curso con este título'\", function () {\r",
+							"            pm.expect(pm.response.json().error).to.eql('Ya existe un curso con este título');\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZW1haWwiOiJlZHVAdWEifQ.V_02yjmXYX19Yteko-nKHpFPL_xHa9fGOkTK_ubdiLk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Curso C#\",\r\n    \"descripcion\": \"Avanzado\",\r\n    \"precio\": \"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/cursos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cursos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Curso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Definir el host de la API\r",
+							"pm.environment.set(\"host\", \"http://localhost:3000\");\r",
+							"\r",
+							"// Obtener el token de autenticación (asegúrate de ajustar esto según tu implementación de autenticación)\r",
+							"const token = \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJsdWlzQHVhIn0.B2QTdNkjICiZrLd3HePI1gh7IOc4BhLunc1qcatR9dc\";\r",
+							"\r",
+							"// Configurar los headers con el token de autenticación\r",
+							"pm.request.headers.add({key: 'Authorization', value: `Bearer ${token}`});\r",
+							"\r",
+							"// Definir el ID del curso que deseas recuperar\r",
+							"const courseId = \"1\"; // Asegúrate de ajustar el ID del curso que deseas recuperar\r",
+							"\r",
+							"// Enviar la solicitud GET a la ruta /api/cursos/:id\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"host\") + `/api/cursos/${courseId}`,\r",
+							"    method: 'GET',\r",
+							"    header: 'Content-Type:application/json'\r",
+							"}, function (err, response) {\r",
+							"    // Verificar si no hay errores\r",
+							"    if (err) {\r",
+							"        console.log(err);\r",
+							"    } else {\r",
+							"        // Verificar el código de estado\r",
+							"        pm.test(\"Estado de respuesta es 200\", function () {\r",
+							"            pm.response.to.have.status(200);\r",
+							"        });\r",
+							"\r",
+							"        // Verificar la presencia de datos de curso en la respuesta\r",
+							"        pm.test(\"Datos de curso presentes en la respuesta\", function () {\r",
+							"            pm.expect(pm.response.json()).to.have.property('titulo');\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJsdWlzQHVhIn0.B2QTdNkjICiZrLd3HePI1gh7IOc4BhLunc1qcatR9dc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/cursos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cursos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditarCurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Definir el host de la API\r",
+							"pm.environment.set(\"host\", \"http://localhost:3000\");\r",
+							"\r",
+							"// Obtener el token de autenticación (asegúrate de ajustar esto según tu implementación de autenticación)\r",
+							"const token = \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZW1haWwiOiJlZHVAdWEifQ.V_02yjmXYX19Yteko-nKHpFPL_xHa9fGOkTK_ubdiLk\";\r",
+							"\r",
+							"// Configurar los headers con el token de autenticación\r",
+							"pm.request.headers.add({key: 'Authorization', value: `Bearer ${token}`});\r",
+							"\r",
+							"// Definir el ID del curso que deseas actualizar\r",
+							"const courseId = \"8\"; // Asegúrate de ajustar el ID del curso que deseas actualizar\r",
+							"\r",
+							"// Definir el body de la solicitud de actualización\r",
+							"const requestBody = {\r",
+							"    \"descripcion\": \"Nueva descripción del curso\",\r",
+							"    \"precio\": 29.99\r",
+							"};\r",
+							"\r",
+							"// Enviar la solicitud PUT a la ruta /api/cursos/:id\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"host\") + `/api/cursos/${courseId}`,\r",
+							"    method: 'PUT',\r",
+							"    header: 'Content-Type:application/json',\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(requestBody)\r",
+							"    }\r",
+							"}, function (err, response) {\r",
+							"    // Verificar si no hay errores\r",
+							"    if (err) {\r",
+							"        console.log(err);\r",
+							"    } else {\r",
+							"        // Verificar el código de estado\r",
+							"        pm.test(\"Estado de respuesta es 200\", function () {\r",
+							"            pm.response.to.have.status(200);\r",
+							"        });\r",
+							"\r",
+							"        // Verificar el mensaje de respuesta\r",
+							"        pm.test(\"Mensaje de respuesta es 'Curso actualizado exitosamente'\", function () {\r",
+							"            pm.expect(pm.response.json().message).to.eql('Curso actualizado exitosamente');\r",
+							"        });\r",
+							"\r",
+							"        // Verificar la presencia de datos de curso actualizados en la respuesta\r",
+							"        pm.test(\"Datos de curso actualizados presentes en la respuesta\", function () {\r",
+							"            pm.expect(pm.response.json()).to.have.property('curso');\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZW1haWwiOiJlZHVAdWEifQ.V_02yjmXYX19Yteko-nKHpFPL_xHa9fGOkTK_ubdiLk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descripcion\": \"Para Principiantes\",\r\n    \"precio\": \"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/cursos/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cursos",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ElimininarCurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Definir el host de la API\r",
+							"pm.environment.set(\"host\", \"http://localhost:3000\");\r",
+							"\r",
+							"// Obtener el token de autenticación (asegúrate de ajustar esto según tu implementación de autenticación)\r",
+							"const token = \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZW1haWwiOiJlZHVAdWEifQ.V_02yjmXYX19Yteko-nKHpFPL_xHa9fGOkTK_ubdiLk\";\r",
+							"\r",
+							"// Configurar los headers con el token de autenticación\r",
+							"pm.request.headers.add({key: 'Authorization', value: `Bearer ${token}`});\r",
+							"\r",
+							"// Definir el ID del curso que deseas eliminar\r",
+							"const courseId = \"7\"; // Asegúrate de ajustar el ID del curso que deseas eliminar\r",
+							"\r",
+							"// Enviar la solicitud DELETE a la ruta /api/cursos/:id\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"host\") + `/api/cursos/${courseId}`,\r",
+							"    method: 'DELETE',\r",
+							"    header: 'Content-Type:application/json'\r",
+							"}, function (err, response) {\r",
+							"    // Verificar si no hay errores\r",
+							"    if (err) {\r",
+							"        console.log(err);\r",
+							"    } else {\r",
+							"        // Verificar el código de estado\r",
+							"        pm.test(\"Estado de respuesta es 403\", function () {\r",
+							"            pm.response.to.have.status(403);\r",
+							"        });\r",
+							"\r",
+							"        // Verificar el mensaje de respuesta\r",
+							"        pm.test(\"Mensaje de respuesta es 'No puedes eliminar un curso del que no eres el autor'\", function () {\r",
+							"            pm.expect(pm.response.json().message).to.eql('No puedes eliminar un curso del que no eres el autor');\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZW1haWwiOiJlZHVAdWEifQ.V_02yjmXYX19Yteko-nKHpFPL_xHa9fGOkTK_ubdiLk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/cursos/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cursos",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "misCursos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Definir el host de la API\r",
+							"pm.environment.set(\"host\", \"http://localhost:3000\");\r",
+							"\r",
+							"// Obtener el token de autenticación (asegúrate de ajustar esto según tu implementación de autenticación)\r",
+							"const token = \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJsdWlzQHVhIn0.B2QTdNkjICiZrLd3HePI1gh7IOc4BhLunc1qcatR9dc\";\r",
+							"\r",
+							"// Configurar los headers con el token de autenticación\r",
+							"pm.request.headers.add({key: 'Authorization', value: `Bearer ${token}`});\r",
+							"\r",
+							"// Enviar la solicitud GET a la ruta /api/cursos\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"host\") + \"/api/misCursos\",\r",
+							"    method: 'GET',\r",
+							"    header: 'Content-Type:application/json'\r",
+							"}, function (err, response) {\r",
+							"    // Verificar si no hay errores\r",
+							"    if (err) {\r",
+							"        console.log(err);\r",
+							"    } else {\r",
+							"        // Verificar el código de estado\r",
+							"        pm.test(\"Estado de respuesta es 200\", function () {\r",
+							"            pm.response.to.have.status(200);\r",
+							"        });\r",
+							"\r",
+							"        // Verificar la presencia de datos de cursos en la respuesta\r",
+							"        pm.test(\"Datos de cursos presentes en la respuesta\", function () {\r",
+							"            pm.expect(pm.response.json()).to.have.property('datos');\r",
+							"        });\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJsdWlzQHVhIn0.B2QTdNkjICiZrLd3HePI1gh7IOc4BhLunc1qcatR9dc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/misCursos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"misCursos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

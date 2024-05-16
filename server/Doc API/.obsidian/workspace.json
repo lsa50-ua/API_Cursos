@@ -1,0 +1,159 @@
+{
+  "main": {
+    "id": "881bba9e600e7dba",
+    "type": "split",
+    "children": [
+      {
+        "id": "91db1d2dc9603f5f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1c73f59248bb374d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "definicion_API.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b09fd39f8dc15545",
+    "type": "split",
+    "children": [
+      {
+        "id": "9e6118032ab21c6a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "abf5f94cb2e3f935",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "dbb7ad5019aa3c3b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "3c9a1d5315d6eeef",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "816185f9e068eb75",
+    "type": "split",
+    "children": [
+      {
+        "id": "70310a08e9a40b58",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ff2714e3aa905b30",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "definicion_API.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "815440d606b27445",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "definicion_API.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ba9ad33c4cb694fe",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "0600b66d0dc8fd24",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "definicion_API.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "1c73f59248bb374d",
+  "lastOpenFiles": [
+    "openapi.md",
+    "mapeado.md",
+    "historias.md",
+    "definicion_API.md",
+    "modelo_dominio.md",
+    "Index.md",
+    "modificacion.md"
+  ]
+}
